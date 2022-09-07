@@ -1,0 +1,32 @@
+Set Hostname
+sudo hostnamectl set-hostname master.itzgeek.local
+192.168.0.10 master.itzgeek.local master
+192.168.0.20 worker.itzgeek.local worker
+
+Edit firewall
+sudo ufw enable
+On master-node
+sudo ufw allow 6443/tcp
+ufw allow 2379/tcp
+sudo ufw allow 2380/tcp
+sudo ufw allow 10250/tcp
+sudo ufw allow 10257/tcp
+sudo ufw allow 10259/tcp
+sudo ufw reload
+on worker-node
+sudo ufw allow 10250/tcp
+sudo ufw allow 30000:32767/tcp
+sudo ufw reload
+
+
+54.87.106.185/32, 44.206.128.28/32, 50.16.142.154/32
+
+
+https://www.fosstechnix.com/how-to-install-kubernetes-cluster-on-ubuntu/
+https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/install-kubernetes-on-ubuntu-22-04.html
+https://ubuntu.com/server/docs/security-firewall
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+if kubectl get nodes is not working then kindly copy /etc/kubernetes/admin.conf from master node to all worker node.
+
